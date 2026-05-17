@@ -1,23 +1,34 @@
 package com.watchflow.WatchFlow.core.domain.amizade;
 
+import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
+import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
+@Table(name = "amizades")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Amizade {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private UUID usuarioRemetenteId;
-    private UUID usuarioDestinatarioId;
 
-    @Builder.Default
-    private StatusAmizade status = StatusAmizade.PENDENTE;
+    @ManyToOne
+    @JoinColumn(name = "solicitante_id", nullable = false)
+    private Usuario solicitante;
 
-    @Builder.Default
-    private LocalDateTime dataDeCriacao = LocalDateTime.now();
+    @ManyToOne
+    @JoinColumn(name = "solicitado_id", nullable = false)
+    private Usuario solicitado;
+
+    @Enumerated(EnumType.STRING)
+    private StatusAmizade status;
+
+    private LocalDateTime dataSolicitacao;
 }

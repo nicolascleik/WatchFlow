@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.adapters.in.controller.AmizadeController;
+package com.watchflow.WatchFlow.adapters.in.controller.FriendshipController;
 
 import com.watchflow.WatchFlow.adapters.out.repository.UsuarioRepository;
 import com.watchflow.WatchFlow.core.domain.usuario.Usuario;

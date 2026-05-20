@@ -1,6 +1,7 @@
 package com.watchflow.WatchFlow.adapters.out.gateway.AmizadeGateway;
 
-import com.watchflow.WatchFlow.adapters.out.repository.AmizadeRepository;
+import com.watchflow.WatchFlow.adapters.out.gateway.repository.AmizadeRepository;
+// import com.watchflow.WatchFlow.adapters.out.repository.AmizadeRepository;
 import com.watchflow.WatchFlow.core.domain.amizade.Amizade;
 import com.watchflow.WatchFlow.core.gateway.AmizadeGateway;
 import org.springframework.stereotype.Component;

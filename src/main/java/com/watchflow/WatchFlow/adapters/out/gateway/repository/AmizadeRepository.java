@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.adapters.out.repository;
+package com.watchflow.WatchFlow.adapters.out.gateway.repository;
 
 import com.watchflow.WatchFlow.core.domain.amizade.Amizade;
 import org.springframework.data.jpa.repository.JpaRepository;

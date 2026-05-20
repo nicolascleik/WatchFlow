@@ -6,25 +6,35 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class UsuarioGatewayImpl implements UsuarioGateway {
-    private List<Usuario> usuarios = new ArrayList<>();
+    private final List<Usuario> usuarios = new ArrayList<>();
 
     @Override
     public void salvar(Usuario usuario) {
-        if(!existePorEmail(usuario.getEmail())){
+        if (!existePorEmail(usuario.getEmail())) {
             usuarios.add(usuario);
         }
     }
 
     @Override
     public boolean existePorEmail(String email) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+        return usuarios.stream()
+                .anyMatch(usuario -> usuario.getEmail().equals(email));
+    }
+
+    @Override
+    public Usuario buscarPorId(UUID id) {
+        return usuarios.stream()
+                .filter(usuario -> id.equals(usuario.getId()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public List<Usuario> buscarTodos() {
+        return new ArrayList<>(usuarios);
     }
 }

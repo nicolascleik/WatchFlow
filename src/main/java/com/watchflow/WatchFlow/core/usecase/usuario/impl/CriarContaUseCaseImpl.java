@@ -7,6 +7,8 @@ import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaCommand;
 import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaUseCase;
 import lombok.RequiredArgsConstructor;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 public class CriarContaUseCaseImpl implements CriarContaUseCase {
     private final UsuarioGateway usuarioGateway;
@@ -16,13 +18,14 @@ public class CriarContaUseCaseImpl implements CriarContaUseCase {
     public void executar(CriarContaCommand comando) {
         boolean emailExiste = usuarioGateway.existePorEmail(comando.getEmail());
 
-        if(!emailExiste){
+        if (emailExiste) {
             throw new IllegalArgumentException("Email já cadastrado na plataforma.");
         }
 
         String senhaCodificada = codificadorSenhaGateway.codificar(comando.getSenha());
 
         Usuario usuario = Usuario.builder()
+                .id(UUID.randomUUID())
                 .nome(comando.getNome())
                 .email(comando.getEmail())
                 .senha(senhaCodificada)

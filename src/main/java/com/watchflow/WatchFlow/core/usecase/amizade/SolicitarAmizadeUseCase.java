@@ -1,10 +1,5 @@
 package com.watchflow.WatchFlow.core.usecase.amizade;
 
-public class SolicitarAmizadeUseCase {
-    
-}
-package com.watchflow.WatchFlow.core.usecase.amizade;
-
 import com.watchflow.WatchFlow.core.domain.amizade.Amizade;
 import com.watchflow.WatchFlow.core.domain.amizade.StatusAmizade;
 import com.watchflow.WatchFlow.core.domain.usuario.Usuario;

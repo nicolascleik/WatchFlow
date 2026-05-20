@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.adapters.out.gateway.UsuarioGateway;
+package com.watchflow.WatchFlow.adapters.out.gateway.impl;
 
 import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
 import com.watchflow.WatchFlow.core.gateway.UsuarioGateway;

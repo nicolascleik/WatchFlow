@@ -25,7 +25,7 @@ public class SolicitarAmizadeUseCase {
         Amizade novaAmizade = Amizade.builder()
                 .solicitante(solicitante)
                 .solicitado(solicitado)
-                .status(StatusAmizade.PENDENTE) // A amizade nasce sempre como PENDENTE
+                .status(StatusAmizade.PENDENTE) 
                 .dataSolicitacao(LocalDateTime.now())
                 .build();
         return amizadeGateway.salvar(novaAmizade);

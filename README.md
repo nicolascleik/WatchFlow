@@ -1,79 +1,669 @@
-# WatchFlow - Streaming Locator & Social Network
+# WatchFlow — Streaming Locator & Social Network
+
+> Uma plataforma inteligente de descoberta de filmes e séries unida a uma experiência social completa para cinéfilos.
+
+---
 
 ## Sobre o Projeto
 
-O **WatchFlow** é uma plataforma híbrida desenhada para resolver a atual fragmentação do mercado de streaming, unindo a utilidade de um localizador de mídias com o engajamento de uma rede social nichada.
+O **WatchFlow** nasceu para resolver um dos maiores problemas atuais do entretenimento digital: a fragmentação dos streamings.
 
-O sistema permite pesquisar filmes e séries e descobrir instantaneamente em qual plataforma de streaming o título está disponível para assinatura ou aluguel. Além de ser um utilitário, o WatchFlow conecta cinéfilos. Através de um sistema inteligente de *match* baseado em categorias favoritas (animação, comédia, terror, etc.) e geolocalização, a plataforma sugere conexões reais — permitindo encontrar amigos com gostos semelhantes na sua região.
+Hoje, um usuário muitas vezes sabe o que deseja assistir, mas não sabe **em qual plataforma o conteúdo está disponível**. O WatchFlow centraliza essa busca e adiciona uma camada social poderosa, conectando pessoas através dos seus gostos cinematográficos.
+
+A proposta do projeto vai além de um simples buscador de filmes. O sistema foi arquitetado para funcionar como uma rede social especializada em cinema e séries, permitindo:
+
+* Descobrir onde assistir determinado conteúdo
+* Criar conexões com pessoas de gostos parecidos
+* Conversar em tempo real
+* Receber recomendações personalizadas
+* Registrar histórico de conteúdos assistidos
+* Criar uma experiência social baseada em entretenimento
 
 ---
 
-## Principais Funcionalidades
+# O Que o WatchFlow Faz
 
-* **Busca de Catálogo Externa:** Integração direta com a API do **The Movie Database (TMDB)** para buscar metadados de filmes e séries com precisão.
-* **Roteamento de Streaming:** Identificação de disponibilidade da mídia nas plataformas do mercado.
-* **Rede Social e Match:** Sistema de amizades (Solicitar, Aceitar, Bloquear) com sugestões baseadas em cruzamento de preferências e localização.
-* **Comunicação P2P:** Sistema de troca de mensagens (Chat) com status de leitura.
-* **Gestão de Perfil e Histórico:** Autenticação segura de usuários e registro de mídias assistidas.
+## Busca Inteligente de Filmes e Séries
+
+A plataforma integra diretamente com a API do TMDB (*The Movie Database*) para buscar:
+
+* Filmes
+* Séries
+* Episódios
+* Categorias
+* Avaliações
+* Imagens
+* Metadados
+
+Além disso, o sistema identifica:
+
+* Em qual streaming o conteúdo está disponível
+* Se está disponível para aluguel
+* Se ainda não foi lançado
+* Se o conteúdo não existe nas plataformas integradas
 
 ---
 
-## Arquitetura do Sistema (Clean Architecture)
+## Localizador de Streaming
 
-Para garantir que o software seja escalável, testável e independente de frameworks de terceiros, o backend foi desenhado sob os rígidos padrões da **Arquitetura Limpa (Clean Architecture)**. A regra de negócio não sabe que o banco de dados ou a internet existem.
+O usuário poderá pesquisar:
 
-```text
-src/main/java/com/watchflow/watchflow
+* “Onde assistir Interestelar?”
+* “Qual streaming possui Breaking Bad?”
+* “Oppenheimer está disponível para aluguel?”
+
+O sistema irá responder dinamicamente com os serviços disponíveis.
+
+Exemplo:
+
+| Filme        | Plataforma         | Tipo       |
+| ------------ | ------------------ | ---------- |
+| Interstellar | HBO Max            | Assinatura |
+| John Wick 4  | Prime Video        | Aluguel    |
+| Deadpool 3   | Ainda indisponível | Em breve   |
+
+---
+
+# Rede Social Integrada
+
+O WatchFlow também funciona como uma rede social nichada para fãs de cinema.
+
+## Funcionalidades Sociais
+
+### Sistema de Amizade
+
+* Enviar solicitação
+* Aceitar amizade
+* Bloquear usuários
+* Remover amizade
+
+---
+
+### Chat em Tempo Real
+
+Usuários poderão conversar via:
+
+* WebSockets
+* Mensagens privadas
+* Atualização em tempo real
+* Status de leitura
+
+---
+
+### Match Inteligente de Usuários
+
+As sugestões de amizade serão feitas com base em:
+
+* Preferências de categorias
+* Histórico de filmes
+* Localização aproximada
+* Interesses em comum
+
+Exemplo:
+
+> “Usuários próximos de você que gostam de Ficção Científica e Terror”
+
+---
+
+# Sistema de Login
+
+O sistema possui autenticação baseada em:
+
+* E-mail
+* Senha criptografada
+* JWT futuramente
+* Controle de sessão
+* Spring Security
+
+Durante o cadastro o usuário poderá selecionar:
+
+* Gêneros favoritos
+* Preferências
+* Interesses cinematográficos
+
+Essas informações alimentam:
+
+* O sistema de recomendações
+* Sugestões sociais
+* Descoberta de conteúdo
+
+---
+
+# Arquitetura do Projeto
+
+O backend do WatchFlow foi desenvolvido utilizando os conceitos de:
+
+* **Clean Architecture**
+* **DDD (Domain Driven Design)**
+* **SOLID**
+* **Ports & Adapters**
+* **Separação total entre regra de negócio e framework**
+
+O objetivo é garantir:
+
+* Alta escalabilidade
+* Fácil manutenção
+* Testabilidade
+* Independência do Spring Boot
+* Facilidade de troca de tecnologias futuramente
+
+---
+
+# Estrutura do Projeto
+
+```txt
+src/main/java/com/watchFlow
+
 │
-├── core/                               <-- 1. O NÚCLEO (Puro Java, Zero Frameworks)
-│   ├── domain/                         <-- Entidades puras do negócio (Usuario, Amizade, MediaBase)
-│   ├── usecase/                        <-- Regras de Orquestração (Ex: CriarContaUseCase)
-│   └── gateway/                        <-- Contratos de Saída (Interfaces que o Core dita)
+├── core/                               <-- 1. O NÚCLEO (Zero Spring, Zero Dependências Externas)
 │
-├── adapters/                           <-- 2. OS TRADUTORES (Adaptadores de Interface)
-│   ├── in/                             <-- Entrada (Quem aciona o sistema)
-│   │   └── controller/                 <-- Endpoints Web (Recebem JSON e acionam os Casos de Uso)
+│   ├── domain/
 │   │
-│   └── out/                            <-- Saída (Como o sistema fala com o mundo real)
-│       └── gateway/                    <-- Implementação das interfaces do Core
+│   │   ├── usuario/                    <-- Entidades de usuário e regras puras
+│   │   ├── amizade/                    <-- Regras de amizade e relacionamentos
+│   │   ├── chat/                       <-- Mensagens e comunicação
+│   │   └── midia/                      <-- Filme, Série, Episódio e abstrações
+│   │
+│   └── usecase/                        <-- Casos de uso do sistema
 │
-└── infrastructure/                     <-- 3. O MUNDO REAL (Frameworks, DB, I/O)
-    ├── config/                         <-- Painel de controle (Security, Injeção de Dependências)
-    ├── web/                            <-- Tratamento global de exceções e WebSockets
-    ├── persistence/                    <-- Entidades JPA, Spring Data Repositories e Mappers
-    └── client/                         <-- Integrações HTTP via OpenFeign (Ex: TmdbClientImpl)
-
+│       ├── usuario/
+│       ├── amizade/
+│       ├── chat/
+│       └── catalogo/
+│
+├── adapters/                           <-- Camada tradutora
+│
+│   ├── in/
+│   │
+│   │   └── controller/                 <-- Endpoints REST da aplicação
+│   │
+│   └── out/
+│
+│       └── gateway/                    <-- Interfaces de comunicação externa
+│
+└── infrastructure/                     <-- Camada de infraestrutura real
+│
+    ├── config/                         <-- Segurança, Beans e configurações
+    │
+    ├── web/                            <-- WebSockets e Exceptions globais
+    │
+    ├── persistence/                    <-- PostgreSQL + Hibernate
+    │
+    │   ├── entity/                     <-- Classes JPA
+    │   ├── repository/                 <-- Spring Data JPA
+    │   └── mapper/                     <-- Conversores Entity ↔ Domain
+    │
+    └── client/
+        └── tmdb/                       <-- Integração OpenFeign com TMDB
 ```
 
 ---
 
-## tack Tecnológica
+# Explicando Cada Camada da Arquitetura
 
-* **Linguagem:** Java
-* **Framework:** Spring Boot
-* **Banco de Dados:** PostgreSQL
-* **Controle de Versão de DB:** Flyway
-* **Comunicação Externa:** Spring Cloud OpenFeign
-* **Tempo Real:** WebSockets
-* **Infraestrutura:** Docker & Docker Compose
+## `core/` → O Coração da Aplicação
+
+Essa camada não conhece:
+
+* Spring
+* Banco de dados
+* HTTP
+* APIs externas
+
+Ela contém apenas:
+
+* Regras de negócio
+* Entidades puras
+* Casos de uso
+
+Isso significa que a regra do sistema continua funcionando mesmo que:
+
+* PostgreSQL seja trocado por MongoDB
+* Spring seja trocado futuramente
+* A API do TMDB deixe de existir
 
 ---
 
-## Desmistificando o Spring Boot
+## `adapters/` → Tradutores
 
-Se você está explorando este repositório para aprender, é importante entender como o Spring Boot "dá vida" a essa arquitetura. O Spring funciona baseado em Injeção de Dependências e usa anotações (decorators) para gerenciar objetos (Beans). Aqui estão os principais conceitos aplicados neste projeto:
+A função dessa camada é converter o “mundo externo” para algo que o Core entenda.
 
-* **`@RestController` & `@RequestMapping`:** Usados na camada `adapters/in/controller`. Eles transformam uma classe Java comum em um "Garçom" da Web, capaz de receber requisições HTTP (GET, POST) e devolver arquivos JSON formatados.
-* **`@Configuration` & `@Bean`:** A base da nossa Injeção de Dependência manual. Em vez de espalhar `@Service` pelo nosso núcleo, usamos classes de configuração na `infrastructure` para instanciar nossos Casos de Uso e injetar as dependências neles. O Spring guarda esses objetos na memória e os distribui onde for necessário.
-* **`@Entity` & `@Table`:** Usados na camada `infrastructure/persistence`. Transformam uma classe Java em uma representação exata de uma tabela do PostgreSQL. No WatchFlow, essas classes são separadas do Domínio puro.
-* **OpenFeign:** Uma ferramenta mágica declarativa. Em vez de escrever dezenas de linhas para fazer uma requisição HTTP para a API do TMDB, nós criamos uma interface e o Spring gera o código de comunicação automaticamente por baixo dos panos.
+Exemplo:
+
+* JSON → Objeto Java
+* HTTP → Caso de uso
+* Banco → Entidade de domínio
 
 ---
 
-## Roadmap e Futuro do Projeto
+## `infrastructure/` → O Mundo Real
 
-O desenvolvimento atual contempla o alicerce do Backend e as integrações essenciais. Os próximos passos para o ecossistema WatchFlow incluem:
+Aqui ficam:
 
-1. **Desenvolvimento do Frontend (UI/UX):** Construção da interface de usuário utilizando **Next.js** (React) para entregar uma experiência fluida, responsiva e otimizada para SEO.
-2. **Implementação de Mappers:** Refinamento da separação entre DTOs, Entidades JPA e Entidades de Domínio para blindar totalmente o Core.
-3. **Módulo de Streaming ao Vivo:** Integração de salas de "Watch Party", permitindo que amigos sincronizem a exibição de filmes enquanto interagem pelo chat em tempo real via WebSockets.
+* Spring Boot
+* PostgreSQL
+* WebSockets
+* OpenFeign
+* Security
+* Docker
+* Beans
+
+É a única camada que conhece tecnologias externas.
+
+---
+
+# Banco de Dados
+
+O sistema foi desenhado pensando em escalabilidade social.
+
+## Principais tabelas:
+
+### Usuario
+
+Armazena:
+
+* Nome
+* E-mail
+* Senha criptografada
+* Cidade
+* Estado
+
+---
+
+### Categorias
+
+Representa:
+
+* Terror
+* Comédia
+* Drama
+* Sci-Fi
+* etc.
+
+---
+
+### Categoria de Interesse
+
+Tabela N:N entre:
+
+* Usuário
+* Categorias favoritas
+
+---
+
+### Filmes Assistidos
+
+Registra:
+
+* Filmes vistos
+* Data
+* Histórico do usuário
+
+---
+
+### Amizades
+
+Sistema bidirecional contendo:
+
+* Solicitações
+* Aceite
+* Bloqueios
+* Status
+
+---
+
+### Mensagens
+
+Chat privado contendo:
+
+* Remetente
+* Destinatário
+* Texto
+* Status de leitura
+* Data/hora
+
+---
+
+# Integração com APIs Externas
+
+O WatchFlow utiliza:
+
+## TMDB — The Movie Database
+
+Fonte principal de:
+
+* Filmes
+* Séries
+* Imagens
+* Descrições
+* Gêneros
+* Popularidade
+* Avaliações
+
+A comunicação é feita utilizando:
+
+* OpenFeign
+* Spring Cloud
+* Clients desacoplados
+
+---
+
+# Stack Tecnológica
+
+## Backend
+
+* Java 21+
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* OpenFeign
+* WebSocket
+* Validation
+* Lombok
+
+---
+
+## Banco de Dados
+
+* PostgreSQL
+* Flyway Migration
+
+---
+
+## Infraestrutura
+
+* Docker
+* Docker Compose
+
+---
+
+## APIs
+
+* TMDB API
+
+---
+
+# Docker e Infraestrutura
+
+O projeto foi pensado desde o início para ser containerizado.
+
+O ambiente utilizará:
+
+* Backend Spring Boot
+* PostgreSQL
+* Containers independentes
+* Rede compartilhada via Docker Compose
+
+Benefícios:
+
+* Facilidade de deploy
+* Ambientes padronizados
+* Setup rápido
+* Desenvolvimento simplificado
+
+---
+
+# Entendendo o Spring Boot no Projeto
+
+Este projeto também funciona como uma documentação prática para iniciantes em Spring Boot.
+
+---
+
+# O que é um Bean?
+
+Um **Bean** é um objeto controlado pelo Spring.
+
+Ao invés de criar objetos manualmente com:
+
+```java
+new UsuarioService()
+```
+
+O Spring:
+
+* instancia
+* gerencia
+* injeta
+* compartilha
+
+automaticamente.
+
+---
+
+# Principais Anotações do Projeto
+
+## `@RestController`
+
+Transforma uma classe em um endpoint HTTP.
+
+Exemplo:
+
+```java
+@RestController
+@RequestMapping("/users")
+public class UserController {
+}
+```
+
+Responsável por:
+
+* receber requisições
+* devolver JSON
+* conversar com os casos de uso
+
+---
+
+## `@RequestMapping`
+
+Define rotas da API.
+
+Exemplo:
+
+```java
+@RequestMapping("/movies")
+```
+
+---
+
+## `@GetMapping`, `@PostMapping`
+
+Mapeiam métodos HTTP.
+
+```java
+@GetMapping
+@PostMapping
+```
+
+---
+
+## `@Service`
+
+Marca uma classe de serviço do Spring.
+
+Apesar disso, o projeto busca reduzir dependência excessiva de `@Service` dentro do Core, priorizando injeção via configuração.
+
+---
+
+## `@Configuration`
+
+Classe responsável por configuração manual do Spring.
+
+Exemplo:
+
+```java
+@Configuration
+public class BeanConfig {
+}
+```
+
+---
+
+## `@Bean`
+
+Define manualmente objetos gerenciados pelo Spring.
+
+Exemplo:
+
+```java
+@Bean
+public FazerLoginUseCase fazerLoginUseCase() {
+    return new FazerLoginUseCase(...);
+}
+```
+
+---
+
+## `@Entity`
+
+Transforma uma classe em tabela do banco.
+
+```java
+@Entity
+@Table(name = "usuarios")
+```
+
+---
+
+## `@Repository`
+
+Representa acesso ao banco de dados.
+
+Muito utilizado com Spring Data JPA.
+
+---
+
+## `@Autowired`
+
+Permite injeção automática de dependências.
+
+Embora atualmente exista, o projeto tende a priorizar injeção por construtor.
+
+---
+
+## `@Component`
+
+Marca componentes genéricos controlados pelo Spring.
+
+---
+
+## `@Transactional`
+
+Controla transações do banco.
+
+Se algo falhar:
+
+* rollback automático
+* consistência garantida
+
+---
+
+## `@Valid`
+
+Validação automática de DTOs.
+
+Exemplo:
+
+```java
+public ResponseEntity<?> criar(@Valid @RequestBody UserDTO dto)
+```
+
+---
+
+# Fluxo Interno da Aplicação
+
+## Exemplo de Login
+
+```txt
+Controller
+   ↓
+UseCase
+   ↓
+Gateway
+   ↓
+Repository
+   ↓
+Banco de Dados
+```
+
+---
+
+# Segurança
+
+A aplicação utiliza:
+
+* Spring Security
+* Criptografia de senha
+* Controle de autenticação
+* Futuro suporte JWT
+* Proteção de rotas
+
+---
+
+# Comunicação em Tempo Real
+
+O chat será construído usando:
+
+* WebSockets
+* Sessões persistentes
+* Comunicação instantânea
+
+Permitindo:
+
+* Mensagens em tempo real
+* Atualização sem refresh
+* Experiência semelhante a apps modernos
+
+---
+
+# Futuro do Projeto
+
+O WatchFlow foi arquitetado pensando em expansão futura.
+
+---
+
+# Frontend Web
+
+Planeja-se o desenvolvimento de uma interface moderna utilizando:
+
+## Possíveis tecnologias
+
+* Next.js
+* React
+* TailwindCSS
+* ShadCN/UI
+
+Objetivos:
+
+* UI moderna
+* SSR
+* SEO otimizado
+* Alta performance
+* Responsividade
+
+---
+
+# Sistema de Recomendação
+
+* Preferências
+* Histórico
+* Similaridade entre usuários
+
+---
+
+# Objetivos Educacionais
+
+Este repositório foi estruturado baseado em:
+
+* Spring Boot
+* Arquitetura Limpa
+* SOLID
+* JPA/Hibernate
+* WebSockets
+* Docker
+* PostgreSQL
+* APIs REST
+* OpenFeign
+* Separação de responsabilidades
+* Design de software
+
+---

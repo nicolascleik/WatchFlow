@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.adapters.out.gateway.TmdbGateway;
+package com.watchflow.WatchFlow.adapters.out.gateway;
 
 import com.watchflow.WatchFlow.core.domain.midia.Filme;
 import java.util.List;

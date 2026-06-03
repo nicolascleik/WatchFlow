@@ -20,6 +20,10 @@ Serve para iniciar o serviço de banco de dados definido em `compose.yaml` no mo
 
 ## 3. Verificar os serviços Docker em execução
 ```
+# Use quando estiver em outro diretório (especifica o arquivo Compose):
+docker compose -f compose.yaml ps
+
+# Ou, se você já estiver dentro da pasta do projeto `WatchFlow`, pode usar:
 docker compose ps
 ```
 Serve para listar os containers e mostrar o status dos serviços criados pelo Docker Compose.

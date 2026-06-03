@@ -1,6 +1,6 @@
 package com.watchflow.WatchFlow.core.usecase.catalogo;
 
-import com.watchflow.WatchFlow.adapters.out.gateway.TmdbGateway.TmdbGateway;
+import com.watchflow.WatchFlow.adapters.out.gateway.TmdbGateway;
 import com.watchflow.WatchFlow.core.domain.midia.Filme;
 
 import java.util.List;

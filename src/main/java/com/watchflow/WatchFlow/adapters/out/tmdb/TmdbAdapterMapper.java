@@ -1,7 +1,7 @@
-package com.watchflow.WatchFlow.adapters.out.tmdb;
+package com.watchflow.watchflow.adapters.out.tmdb;
 
-import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbFilmeResponse;
-import com.watchflow.WatchFlow.core.domain.midia.Filme;
+import com.watchflow.watchflow.adapters.out.tmdb.response.TmdbFilmeResponse;
+import com.watchflow.watchflow.core.domain.midia.Filme;
 
 public class TmdbAdapterMapper {
 

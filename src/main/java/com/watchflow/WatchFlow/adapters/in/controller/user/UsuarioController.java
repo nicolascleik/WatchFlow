@@ -1,9 +1,9 @@
-package com.watchflow.WatchFlow.adapters.in.controller.UserController;
+package com.watchflow.watchflow.adapters.in.controller.user;
 
-import com.watchflow.WatchFlow.adapters.in.controller.UserController.UsuarioResponse;
-import com.watchflow.WatchFlow.core.usecase.usuario.BuscarUsuarioUseCase;
-import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaCommand;
-import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaUseCase;
+import com.watchflow.watchflow.adapters.in.controller.user.UsuarioResponse;
+import com.watchflow.watchflow.core.usecase.usuario.BuscarUsuarioUseCase;
+import com.watchflow.watchflow.core.usecase.usuario.CriarContaCommand;
+import com.watchflow.watchflow.core.usecase.usuario.CriarContaUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

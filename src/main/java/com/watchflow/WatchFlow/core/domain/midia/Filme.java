@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.core.domain.midia;
+package com.watchflow.watchflow.core.domain.midia;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;

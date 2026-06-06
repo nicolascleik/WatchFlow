@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.adapters.out.tmdb.response;
+package com.watchflow.watchflow.adapters.out.tmdb.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.watchflow.WatchFlow.adapters.out.gateway.impl;
+package com.watchflow.watchflow.adapters.out.gateway.impl;
 
-import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
-import com.watchflow.WatchFlow.core.gateway.UsuarioGateway;
+import com.watchflow.watchflow.core.domain.usuario.Usuario;
+import com.watchflow.watchflow.core.gateway.UsuarioGateway;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

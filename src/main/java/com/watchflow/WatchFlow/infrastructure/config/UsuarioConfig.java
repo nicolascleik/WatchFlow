@@ -1,11 +1,11 @@
-package com.watchflow.WatchFlow.infrastructure.config;
+package com.watchflow.watchflow.infrastructure.config;
 
-import com.watchflow.WatchFlow.core.gateway.CodificadorSenhaGateway;
-import com.watchflow.WatchFlow.core.gateway.UsuarioGateway;
-import com.watchflow.WatchFlow.core.usecase.usuario.BuscarUsuarioUseCase;
-import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaUseCase;
-import com.watchflow.WatchFlow.core.usecase.usuario.impl.BuscarUsuarioUseCaseImpl;
-import com.watchflow.WatchFlow.core.usecase.usuario.impl.CriarContaUseCaseImpl;
+import com.watchflow.watchflow.core.gateway.CodificadorSenhaGateway;
+import com.watchflow.watchflow.core.gateway.UsuarioGateway;
+import com.watchflow.watchflow.core.usecase.usuario.BuscarUsuarioUseCase;
+import com.watchflow.watchflow.core.usecase.usuario.CriarContaUseCase;
+import com.watchflow.watchflow.core.usecase.usuario.impl.BuscarUsuarioUseCaseImpl;
+import com.watchflow.watchflow.core.usecase.usuario.impl.CriarContaUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

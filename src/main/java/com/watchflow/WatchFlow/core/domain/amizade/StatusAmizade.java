@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.core.domain.amizade;
+package com.watchflow.watchflow.core.domain.amizade;
 
 public enum StatusAmizade {
     PENDENTE,

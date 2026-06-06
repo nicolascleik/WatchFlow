@@ -1,9 +1,9 @@
-package com.watchflow.WatchFlow.infrastructure.client.tmdb;
+package com.watchflow.watchflow.infrastructure.client.tmdb;
 
-import com.watchflow.WatchFlow.adapters.out.tmdb.TmdbAdapterMapper;
-import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbPesquisaResponse;
-import com.watchflow.WatchFlow.core.domain.midia.Filme;
-import com.watchflow.WatchFlow.adapters.out.gateway.TmdbGateway;
+import com.watchflow.watchflow.adapters.out.tmdb.TmdbAdapterMapper;
+import com.watchflow.watchflow.adapters.out.tmdb.response.TmdbPesquisaResponse;
+import com.watchflow.watchflow.core.domain.midia.Filme;
+import com.watchflow.watchflow.adapters.out.gateway.TmdbGateway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

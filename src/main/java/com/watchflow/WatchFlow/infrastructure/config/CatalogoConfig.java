@@ -1,7 +1,7 @@
-package com.watchflow.WatchFlow.infrastructure.config;
+package com.watchflow.watchflow.infrastructure.config;
 
-import com.watchflow.WatchFlow.adapters.out.gateway.TmdbGateway;
-import com.watchflow.WatchFlow.core.usecase.catalogo.BuscarFilmesUseCase;
+import com.watchflow.watchflow.adapters.out.gateway.TmdbGateway;
+import com.watchflow.watchflow.core.usecase.catalogo.BuscarFilmesUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

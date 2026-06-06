@@ -1,7 +1,7 @@
-package com.watchflow.WatchFlow.core.domain.chat;
+package com.watchflow.watchflow.core.domain.chat;
 
 
-import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
+import com.watchflow.watchflow.core.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;

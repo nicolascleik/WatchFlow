@@ -1,6 +1,6 @@
-package com.watchflow.WatchFlow.infrastructure.web;
+package com.watchflow.watchflow.infrastructure.web;
 
-import com.watchflow.WatchFlow.core.usecase.usuario.UsuarioNaoEncontradoException;
+import com.watchflow.watchflow.core.usecase.usuario.UsuarioNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

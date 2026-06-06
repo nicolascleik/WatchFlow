@@ -1,7 +1,7 @@
-package com.watchflow.WatchFlow.infrastructure.config;
+package com.watchflow.watchflow.infrastructure.config;
 
-import com.watchflow.WatchFlow.core.gateway.AmizadeGateway;
-import com.watchflow.WatchFlow.core.usecase.amizade.SolicitarAmizadeUseCase;
+import com.watchflow.watchflow.core.gateway.AmizadeGateway;
+import com.watchflow.watchflow.core.usecase.amizade.SolicitarAmizadeUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

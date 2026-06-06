@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow;
+package com.watchflow.watchflow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

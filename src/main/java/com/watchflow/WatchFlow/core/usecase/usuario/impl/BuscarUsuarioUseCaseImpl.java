@@ -1,9 +1,9 @@
-package com.watchflow.WatchFlow.core.usecase.usuario.impl;
+package com.watchflow.watchflow.core.usecase.usuario.impl;
 
-import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
-import com.watchflow.WatchFlow.core.gateway.UsuarioGateway;
-import com.watchflow.WatchFlow.core.usecase.usuario.BuscarUsuarioUseCase;
-import com.watchflow.WatchFlow.core.usecase.usuario.UsuarioNaoEncontradoException;
+import com.watchflow.watchflow.core.domain.usuario.Usuario;
+import com.watchflow.watchflow.core.gateway.UsuarioGateway;
+import com.watchflow.watchflow.core.usecase.usuario.BuscarUsuarioUseCase;
+import com.watchflow.watchflow.core.usecase.usuario.UsuarioNaoEncontradoException;
 
 import java.util.List;
 import java.util.UUID;

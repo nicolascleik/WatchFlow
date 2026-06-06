@@ -1,6 +1,6 @@
-package com.watchflow.WatchFlow.adapters.in.controller.UserController;
+package com.watchflow.watchflow.adapters.in.controller.user;
 
-import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
+import com.watchflow.watchflow.core.domain.usuario.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

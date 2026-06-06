@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.core.gateway;
+package com.watchflow.watchflow.core.gateway;
 
 public interface CodificadorSenhaGateway {
     String codificar(String senhaLimpa);

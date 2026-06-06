@@ -1,10 +1,10 @@
-package com.watchflow.WatchFlow.adapters.out.gateway;
+package com.watchflow.watchflow.adapters.out.gateway;
 
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
+import com.watchflow.watchflow.core.domain.usuario.Usuario;
 
 public interface UsuarioGateway {
     Usuario buscarPorId(UUID id);

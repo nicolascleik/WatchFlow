@@ -1,6 +1,6 @@
-package com.watchflow.WatchFlow.adapters.out.gateway.impl;
+package com.watchflow.watchflow.adapters.out.gateway.impl;
 
-import com.watchflow.WatchFlow.core.gateway.CodificadorSenhaGateway;
+import com.watchflow.watchflow.core.gateway.CodificadorSenhaGateway;
 import org.springframework.stereotype.Component;
 
 @Component

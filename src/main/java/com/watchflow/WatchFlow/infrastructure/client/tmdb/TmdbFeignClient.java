@@ -1,6 +1,6 @@
-package com.watchflow.WatchFlow.infrastructure.client.tmdb;
+package com.watchflow.watchflow.infrastructure.client.tmdb;
 
-import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbPesquisaResponse;
+import com.watchflow.watchflow.adapters.out.tmdb.response.TmdbPesquisaResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

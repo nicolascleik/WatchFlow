@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.core.usecase.usuario;
+package com.watchflow.watchflow.core.usecase.usuario;
 
 public class UsuarioNaoEncontradoException extends RuntimeException {
     public UsuarioNaoEncontradoException(String mensagem) {

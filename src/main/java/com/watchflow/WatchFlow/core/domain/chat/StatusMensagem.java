@@ -1,4 +1,4 @@
-package com.watchflow.watchflow.core.domain.chat;
+package com.watchflow.WatchFlow.core.domain.chat;
 
 public enum StatusMensagem {
     LIDA,

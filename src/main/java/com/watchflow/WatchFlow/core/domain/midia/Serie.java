@@ -1,4 +1,4 @@
-package com.watchflow.watchflow.core.domain.midia;
+package com.watchflow.WatchFlow.core.domain.midia;
 
 import java.util.ArrayList;
 import java.util.List;

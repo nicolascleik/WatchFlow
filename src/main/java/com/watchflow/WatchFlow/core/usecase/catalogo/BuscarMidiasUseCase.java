@@ -1,9 +1,9 @@
-package com.watchflow.watchflow.core.usecase.catalogo;
+package com.watchflow.WatchFlow.core.usecase.catalogo;
 
 import java.util.List;
 
-import com.watchflow.watchflow.adapters.out.gateway.MidiaGateway;
-import com.watchflow.watchflow.core.domain.midia.MediaBase;
+import com.watchflow.WatchFlow.adapters.out.gateway.MidiaGateway;
+import com.watchflow.WatchFlow.core.domain.midia.MediaBase;
 
 import lombok.RequiredArgsConstructor;
 

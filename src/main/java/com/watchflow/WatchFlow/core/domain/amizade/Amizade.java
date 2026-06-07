@@ -1,6 +1,6 @@
-package com.watchflow.watchflow.core.domain.amizade;
+package com.watchflow.WatchFlow.core.domain.amizade;
 
-import com.watchflow.watchflow.core.domain.usuario.Usuario;
+import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;

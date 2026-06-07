@@ -1,4 +1,4 @@
-package com.watchflow.watchflow.core.domain.midia;
+package com.watchflow.WatchFlow.core.domain.midia;
 
 import java.util.List;
 import java.util.UUID;

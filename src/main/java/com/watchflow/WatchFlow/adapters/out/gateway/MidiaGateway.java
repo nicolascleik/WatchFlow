@@ -1,9 +1,9 @@
-package com.watchflow.watchflow.adapters.out.gateway;
+package com.watchflow.WatchFlow.adapters.out.gateway;
 
 import java.util.List;
 
-import com.watchflow.watchflow.core.domain.midia.MediaBase;
-import com.watchflow.watchflow.core.usecase.catalogo.BuscarMidiasUseCase.CriterioOrdenacao;
+import com.watchflow.WatchFlow.core.domain.midia.MediaBase;
+import com.watchflow.WatchFlow.core.usecase.catalogo.BuscarMidiasUseCase.CriterioOrdenacao;
 
 public interface MidiaGateway {
     List<MediaBase> buscarPorTitulo(String titulo);

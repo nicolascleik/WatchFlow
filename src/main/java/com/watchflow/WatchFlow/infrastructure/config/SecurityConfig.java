@@ -1,4 +1,4 @@
-package com.watchflow.watchflow.infrastructure.config;
+package com.watchflow.WatchFlow.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

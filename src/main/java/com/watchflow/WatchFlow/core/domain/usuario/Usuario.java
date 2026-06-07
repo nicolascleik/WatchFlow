@@ -1,4 +1,4 @@
-package com.watchflow.watchflow.core.domain.usuario;
+package com.watchflow.WatchFlow.core.domain.usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

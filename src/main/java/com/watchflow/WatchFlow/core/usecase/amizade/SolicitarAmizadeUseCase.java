@@ -1,9 +1,9 @@
-package com.watchflow.watchflow.core.usecase.amizade;
+package com.watchflow.WatchFlow.core.usecase.amizade;
 
-import com.watchflow.watchflow.core.domain.amizade.Amizade;
-import com.watchflow.watchflow.core.domain.amizade.StatusAmizade;
-import com.watchflow.watchflow.core.domain.usuario.Usuario;
-import com.watchflow.watchflow.core.gateway.AmizadeGateway;
+import com.watchflow.WatchFlow.core.domain.amizade.Amizade;
+import com.watchflow.WatchFlow.core.domain.amizade.StatusAmizade;
+import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
+import com.watchflow.WatchFlow.core.gateway.AmizadeGateway;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

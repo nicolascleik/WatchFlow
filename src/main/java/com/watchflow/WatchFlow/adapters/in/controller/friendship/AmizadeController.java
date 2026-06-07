@@ -1,8 +1,8 @@
-package com.watchflow.watchflow.adapters.in.controller.friendship;
+package com.watchflow.WatchFlow.adapters.in.controller.friendship;
 
-import com.watchflow.watchflow.adapters.out.repository.UsuarioRepository;
-import com.watchflow.watchflow.core.domain.usuario.Usuario;
-import com.watchflow.watchflow.core.usecase.amizade.SolicitarAmizadeUseCase;
+import com.watchflow.WatchFlow.adapters.out.repository.UsuarioRepository;
+import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
+import com.watchflow.WatchFlow.core.usecase.amizade.SolicitarAmizadeUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

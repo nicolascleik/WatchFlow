@@ -1,6 +1,6 @@
-package com.watchflow.watchflow.adapters.out.repository;
+package com.watchflow.WatchFlow.adapters.out.repository;
 
-import com.watchflow.watchflow.core.domain.usuario.Usuario;
+import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
 
 import java.util.Optional;
 import java.util.UUID;

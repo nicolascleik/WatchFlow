@@ -1,10 +1,10 @@
-package com.watchflow.watchflow.core.usecase.usuario.impl;
+package com.watchflow.WatchFlow.core.usecase.usuario.impl;
 
-import com.watchflow.watchflow.core.gateway.CodificadorSenhaGateway;
-import com.watchflow.watchflow.core.gateway.UsuarioGateway;
-import com.watchflow.watchflow.core.domain.usuario.Usuario;
-import com.watchflow.watchflow.core.usecase.usuario.CriarContaCommand;
-import com.watchflow.watchflow.core.usecase.usuario.CriarContaUseCase;
+import com.watchflow.WatchFlow.core.gateway.CodificadorSenhaGateway;
+import com.watchflow.WatchFlow.core.gateway.UsuarioGateway;
+import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
+import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaCommand;
+import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaUseCase;
 import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;

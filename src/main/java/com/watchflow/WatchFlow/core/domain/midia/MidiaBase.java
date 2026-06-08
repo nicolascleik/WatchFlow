@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public abstract class MediaBase {
+public abstract class MidiaBase {
     private UUID id;
     private Long tmdbId;
     private String titulo;
@@ -22,5 +22,5 @@ public abstract class MediaBase {
     private String descricao;
     private double nota;
     private List<String> plataformasDisponiveis;
-    private TipoMedia tipo;
+    private TipoMidia tipo;
 }

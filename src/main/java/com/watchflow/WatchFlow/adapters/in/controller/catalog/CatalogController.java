@@ -1,79 +1,84 @@
 package com.watchflow.WatchFlow.adapters.in.controller.catalog;
 
+import com.watchflow.WatchFlow.core.domain.midia.Categoria;
 import com.watchflow.WatchFlow.core.domain.midia.Filme;
 import com.watchflow.WatchFlow.core.domain.midia.Serie;
-import com.watchflow.WatchFlow.core.usecase.catalogo.CatalogoUseCase;
+import com.watchflow.WatchFlow.core.domain.midia.TipoMidia;
+import com.watchflow.WatchFlow.core.usecase.catalogo.BuscarMidiaUseCase;
+import com.watchflow.WatchFlow.core.usecase.catalogo.DetalharMidiaUseCase;
+import com.watchflow.WatchFlow.core.usecase.catalogo.ListarCategoriasUseCase;
+import com.watchflow.WatchFlow.core.usecase.catalogo.RegistrarMidiaAssistidaCommand;
+import com.watchflow.WatchFlow.core.usecase.catalogo.RegistrarMidiaAssistidaUseCase;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/catalog")
+@RequestMapping("/catalogo")
 public class CatalogController {
 
-    private final CatalogoUseCase catalogoUseCase;
+    private final ListarCategoriasUseCase listarCategoriasUseCase;
+    private final RegistrarMidiaAssistidaUseCase registrarMidiaAssistidaUseCase;
+    private final BuscarMidiaUseCase buscarMidiaUseCase;
+    private final DetalharMidiaUseCase detalharMidiaUseCase;
 
-    public CatalogController(CatalogoUseCase catalogoUseCase) {
-        this.catalogoUseCase = catalogoUseCase;
+    public CatalogController(ListarCategoriasUseCase listarCategoriasUseCase,
+                             RegistrarMidiaAssistidaUseCase registrarMidiaAssistidaUseCase,
+                             BuscarMidiaUseCase buscarMidiaUseCase,
+                             DetalharMidiaUseCase detalharMidiaUseCase) {
+        this.listarCategoriasUseCase = listarCategoriasUseCase;
+        this.registrarMidiaAssistidaUseCase = registrarMidiaAssistidaUseCase;
+        this.buscarMidiaUseCase = buscarMidiaUseCase;
+        this.detalharMidiaUseCase = detalharMidiaUseCase;
     }
 
-    // FILMES
-
-    @GetMapping("/movies/search")
-    public ResponseEntity<List<Filme>> buscarFilmes(
-            @RequestParam String title,
-            @RequestParam(defaultValue = "1") int page,
-            @RequestHeader(value = "Accept-Language", defaultValue = "pt-BR") String idioma) {
-        return ResponseEntity.ok(catalogoUseCase.buscarFilmes(title, idioma, page));
+    @GetMapping("/categorias")
+    public ResponseEntity<List<Categoria>> listarCategorias() {
+        List<Categoria> categorias = listarCategoriasUseCase.executar();
+        return ResponseEntity.ok(categorias);
     }
 
-    @GetMapping("/movies/popular")
-    public ResponseEntity<List<Filme>> filmesPopulares(
-            @RequestParam(defaultValue = "1") int page,
-            @RequestHeader(value = "Accept-Language", defaultValue = "pt-BR") String idioma) {
-        return ResponseEntity.ok(catalogoUseCase.buscarFilmesPopulares(idioma, page));
+    @PostMapping("/assistidos")
+    public ResponseEntity<Void> registrarAssistido(
+            @RequestHeader("X-User-Id") String usuarioLogadoId,
+            @RequestParam("tmdbId") Long tmdbId,
+            @RequestParam("tipoMidia") String tipoMidia
+    ) {
+        UUID userUuid = UUID.fromString(usuarioLogadoId);
+        TipoMidia tipo = TipoMidia.valueOf(tipoMidia.toUpperCase());
+
+        RegistrarMidiaAssistidaCommand command = new RegistrarMidiaAssistidaCommand(userUuid, tmdbId, tipo);
+        registrarMidiaAssistidaUseCase.executar(command);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/movies/{id}")
-    public ResponseEntity<Filme> detalhesFilme(
-            @PathVariable Long id,
-            @RequestHeader(value = "Accept-Language", defaultValue = "pt-BR") String idioma) {
-        Filme filme = catalogoUseCase.buscarDetalhesFilme(id, idioma);
-        return filme != null ? ResponseEntity.ok(filme) : ResponseEntity.notFound().build();
+    @GetMapping("/filmes/buscar")
+    public ResponseEntity<List<Filme>> buscarFilmes(@RequestParam String titulo,
+                                                    @RequestParam(defaultValue = "pt-BR") String idioma,
+                                                    @RequestParam(defaultValue = "1") int pagina) {
+        return ResponseEntity.ok(buscarMidiaUseCase.buscarFilmes(titulo, idioma, pagina));
     }
 
-    @GetMapping("/movies/discover")
-    public ResponseEntity<List<Filme>> descobrirFilmes(
-            @RequestParam(required = false) String genre,
-            @RequestParam(required = false) Integer year,
-            @RequestParam(defaultValue = "1") int page,
-            @RequestHeader(value = "Accept-Language", defaultValue = "pt-BR") String idioma) {
-        return ResponseEntity.ok(catalogoUseCase.descobrirFilmes(genre, year, idioma, page));
+    @GetMapping("/filmes/populares")
+    public ResponseEntity<List<Filme>> buscarFilmesPopulares(@RequestParam(defaultValue = "pt-BR") String idioma,
+                                                             @RequestParam(defaultValue = "1") int pagina) {
+        return ResponseEntity.ok(buscarMidiaUseCase.buscarFilmesPopulares(idioma, pagina));
     }
 
-    // SÉRIES E ANIMES
-
-    @GetMapping("/tv/search")
-    public ResponseEntity<List<Serie>> buscarSeries(
-            @RequestParam String title,
-            @RequestParam(defaultValue = "1") int page,
-            @RequestHeader(value = "Accept-Language", defaultValue = "pt-BR") String idioma) {
-        return ResponseEntity.ok(catalogoUseCase.buscarSeries(title, idioma, page));
+    @GetMapping("/filmes/{id}")
+    public ResponseEntity<Filme> detalharFilme(@PathVariable Long id,
+                                               @RequestParam(defaultValue = "pt-BR") String idioma) {
+        return ResponseEntity.ok(detalharMidiaUseCase.detalharFilme(id, idioma));
     }
 
-    @GetMapping("/tv/popular")
-    public ResponseEntity<List<Serie>> seriesPopulares(
-            @RequestParam(defaultValue = "1") int page,
-            @RequestHeader(value = "Accept-Language", defaultValue = "pt-BR") String idioma) {
-        return ResponseEntity.ok(catalogoUseCase.buscarSeriesPopulares(idioma, page));
-    }
-
-    @GetMapping("/tv/{id}")
-    public ResponseEntity<Serie> detalhesSerie(
-            @PathVariable Long id,
-            @RequestHeader(value = "Accept-Language", defaultValue = "pt-BR") String idioma) {
-        Serie serie = catalogoUseCase.buscarDetalhesSerie(id, idioma);
-        return serie != null ? ResponseEntity.ok(serie) : ResponseEntity.notFound().build();
+    @GetMapping("/series/buscar")
+    public ResponseEntity<List<Serie>> buscarSeries(@RequestParam String titulo,
+                                                    @RequestParam(defaultValue = "pt-BR") String idioma,
+                                                    @RequestParam(defaultValue = "1") int pagina) {
+        return ResponseEntity.ok(buscarMidiaUseCase.buscarSeries(titulo, idioma, pagina));
     }
 }

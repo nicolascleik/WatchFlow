@@ -1,5 +1,6 @@
 package com.watchflow.WatchFlow.core.domain.usuario;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,8 +30,27 @@ public class Usuario {
     private String cidade;
     private String estado;
 
+    @Builder.Default
+    @ElementCollection
     private Set<UUID> filmesAssistidosIds = new HashSet<>();
+
+    @Builder.Default
+    @ElementCollection
     private Set<UUID> episodiosAssistidosIds = new HashSet<>();
+
+    @Builder.Default
+    @ElementCollection
     private Set<UUID> amigosIds = new HashSet<>();
+
+    @Builder.Default
+    @ElementCollection
     private Set<UUID> categoriasFavoritasIds = new HashSet<>();
+
+    public void registrarFilmeAssistido(UUID id) {
+        this.filmesAssistidosIds.add(id);
+    }
+
+    public void registrarEpisodioAssistido(UUID id) {
+        this.episodiosAssistidosIds.add(id);
+    }
 }

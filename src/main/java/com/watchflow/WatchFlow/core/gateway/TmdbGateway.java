@@ -1,4 +1,4 @@
-package com.watchflow.WatchFlow.adapters.out.gateway;
+package com.watchflow.WatchFlow.core.gateway;
 
 import com.watchflow.WatchFlow.core.domain.midia.Filme;
 import com.watchflow.WatchFlow.core.domain.midia.Serie;
@@ -11,7 +11,7 @@ public interface TmdbGateway {
     Filme buscarDetalhesFilme(Long id, String idioma);
     List<Filme> descobrirFilmes(String genero, Integer ano, String idioma, int pagina);
 
-    // séries
+    // series
     List<Serie> buscarSeries(String titulo, String idioma, int pagina);
     List<Serie> buscarSeriesPopulares(String idioma, int pagina);
     Serie buscarDetalhesSerie(Long id, String idioma);

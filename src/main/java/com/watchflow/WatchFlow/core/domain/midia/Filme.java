@@ -9,10 +9,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @SuperBuilder
-public class Filme extends MediaBase{
+public class Filme extends MidiaBase {
     private Integer duracaoDoFilme;
 
     {
-        this.setTipo(TipoMedia.FILME);
+        this.setTipo(TipoMidia.FILME);
     }
 }

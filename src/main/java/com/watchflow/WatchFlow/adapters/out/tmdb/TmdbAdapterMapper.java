@@ -1,13 +1,13 @@
 package com.watchflow.WatchFlow.adapters.out.tmdb;
 
-import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbMediaResponse;
+import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbMidiaResponse;
 import com.watchflow.WatchFlow.core.domain.midia.Filme;
 import com.watchflow.WatchFlow.core.domain.midia.Serie;
 
 public class TmdbAdapterMapper {
 
     // converte o JSON sujo do TMDB para a nossa entidade limpa de Filme
-    public static Filme toFilme(TmdbMediaResponse response) {
+    public static Filme toFilme(TmdbMidiaResponse response) {
         if (response == null) return null;
 
         Filme filme = new Filme();
@@ -24,7 +24,7 @@ public class TmdbAdapterMapper {
     }
 
     // converte o JSON sujo do TMDB para a nossa entidade limpa de Série
-    public static Serie toSerie(TmdbMediaResponse response) {
+    public static Serie toSerie(TmdbMidiaResponse response) {
         if (response == null) return null;
 
         Serie serie = new Serie();

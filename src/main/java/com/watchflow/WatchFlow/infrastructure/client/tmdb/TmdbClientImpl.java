@@ -1,12 +1,12 @@
 package com.watchflow.WatchFlow.infrastructure.client.tmdb;
 
 import com.watchflow.WatchFlow.adapters.out.tmdb.TmdbAdapterMapper;
-import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbMediaResponse;
+import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbMidiaResponse;
 import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbPesquisaResponse;
 import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbProvidersResponse;
 import com.watchflow.WatchFlow.core.domain.midia.Filme;
 import com.watchflow.WatchFlow.core.domain.midia.Serie;
-import com.watchflow.WatchFlow.adapters.out.gateway.TmdbGateway;
+import com.watchflow.WatchFlow.core.gateway.TmdbGateway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -48,7 +48,7 @@ public class TmdbClientImpl implements TmdbGateway {
     @Override
     @Cacheable(value = "detalhesFilme", key = "#id + '-' + #idioma")
     public Filme buscarDetalhesFilme(Long id, String idioma) {
-        TmdbMediaResponse response = feignClient.buscarDetalhesFilme(id, apiKey, idioma);
+        TmdbMidiaResponse response = feignClient.buscarDetalhesFilme(id, apiKey, idioma);
         Filme filme = TmdbAdapterMapper.toFilme(response);
 
         if (filme != null) {
@@ -87,7 +87,7 @@ public class TmdbClientImpl implements TmdbGateway {
     @Override
     @Cacheable(value = "detalhesSerie", key = "#id + '-' + #idioma")
     public Serie buscarDetalhesSerie(Long id, String idioma) {
-        TmdbMediaResponse response = feignClient.buscarDetalhesSerie(id, apiKey, idioma);
+        TmdbMidiaResponse response = feignClient.buscarDetalhesSerie(id, apiKey, idioma);
         Serie serie = TmdbAdapterMapper.toSerie(response);
 
         if (serie != null) {

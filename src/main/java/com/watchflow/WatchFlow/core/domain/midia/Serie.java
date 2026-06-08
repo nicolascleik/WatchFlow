@@ -12,13 +12,13 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @SuperBuilder
-public class Serie extends MediaBase {
+public class Serie extends MidiaBase {
     private Integer totalDeTemporada;
 
     @Builder.Default
     private List<Episodio> listaDeEpisodio = new ArrayList<>();
 
     {
-        this.setTipo(TipoMedia.SERIE);
+        this.setTipo(TipoMidia.SERIE);
     }
 }

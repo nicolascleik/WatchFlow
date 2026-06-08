@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 // DTO unificado: o TMDB manda 'title' para filmes e 'name' para séries
 // mapeamos ambos para não perder dados
-public record TmdbMediaResponse(
+public record TmdbMidiaResponse(
         @JsonProperty("id") Long id,
         @JsonProperty("title") String title,
         @JsonProperty("name") String name,

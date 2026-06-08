@@ -1,6 +1,6 @@
 package com.watchflow.WatchFlow.core.domain.midia;
 
-public enum TipoMedia {
+public enum TipoMidia {
     FILME,
     SERIE
 }

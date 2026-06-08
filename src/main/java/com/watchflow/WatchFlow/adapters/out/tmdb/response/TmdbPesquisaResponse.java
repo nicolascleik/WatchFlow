@@ -5,6 +5,6 @@ import java.util.List;
 
 // lista de resultados genérica usada na busca de Filmes e Séries
 public record TmdbPesquisaResponse(
-        @JsonProperty("results") List<TmdbMediaResponse> results
+        @JsonProperty("results") List<TmdbMidiaResponse> results
 ) {
 }

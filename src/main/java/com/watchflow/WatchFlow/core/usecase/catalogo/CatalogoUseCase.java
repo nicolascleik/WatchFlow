@@ -3,10 +3,12 @@ package com.watchflow.WatchFlow.core.usecase.catalogo;
 import com.watchflow.WatchFlow.adapters.out.gateway.TmdbGateway;
 import com.watchflow.WatchFlow.core.domain.midia.Filme;
 import com.watchflow.WatchFlow.core.domain.midia.Serie;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 // orquestra as buscas e repassa a paginação solicitada pelo front-end
+@Service
 public class CatalogoUseCase {
 
     private final TmdbGateway tmdbGateway;

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Component
@@ -36,5 +37,10 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     @Override
     public List<Usuario> buscarTodos() {
         return new ArrayList<>(usuarios);
+    }
+
+    @Override
+    public List<Usuario> buscarUsuariosPorIds(Set<UUID> amigosIds) {
+        return List.of();
     }
 }

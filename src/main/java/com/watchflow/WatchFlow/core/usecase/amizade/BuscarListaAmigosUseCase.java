@@ -3,7 +3,7 @@ package com.watchflow.WatchFlow.core.usecase.amizade;
 import java.util.List;
 import java.util.UUID;
 
-import com.watchflow.WatchFlow.adapters.out.gateway.UsuarioGateway;
+import com.watchflow.WatchFlow.core.gateway.UsuarioGateway;
 import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
 
 import lombok.RequiredArgsConstructor;

@@ -5,6 +5,9 @@ import com.watchflow.WatchFlow.core.domain.amizade.Amizade;
 import com.watchflow.WatchFlow.core.gateway.AmizadeGateway;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class AmizadeGatewayImpl implements AmizadeGateway {
 
@@ -17,5 +20,10 @@ public class AmizadeGatewayImpl implements AmizadeGateway {
     @Override
     public Amizade salvar(Amizade amizade) {
         return amizadeRepository.save(amizade);
+    }
+
+    @Override
+    public Optional<Amizade> buscarPorId(UUID id) {
+        return amizadeRepository.findById(id);
     }
 }

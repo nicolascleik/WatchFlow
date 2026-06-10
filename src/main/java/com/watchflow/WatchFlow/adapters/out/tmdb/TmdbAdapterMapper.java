@@ -6,7 +6,6 @@ import com.watchflow.WatchFlow.core.domain.midia.Serie;
 
 public class TmdbAdapterMapper {
 
-    // converte o JSON sujo do TMDB para a nossa entidade limpa de Filme
     public static Filme toFilme(TmdbMidiaResponse response) {
         if (response == null) return null;
 
@@ -15,7 +14,9 @@ public class TmdbAdapterMapper {
         filme.setTitulo(response.title() != null ? response.title() : response.name());
         filme.setDescricao(response.overview());
 
-        // pega o ano da data no formato YYYY-MM-DD
+        filme.setNota(response.voteAverage());
+        filme.setPosterPath(response.posterPath());
+
         if (response.releaseDate() != null && response.releaseDate().length() >= 4) {
             filme.setAnoDeLancamento(Integer.parseInt(response.releaseDate().substring(0, 4)));
         }
@@ -23,7 +24,6 @@ public class TmdbAdapterMapper {
         return filme;
     }
 
-    // converte o JSON sujo do TMDB para a nossa entidade limpa de Série
     public static Serie toSerie(TmdbMidiaResponse response) {
         if (response == null) return null;
 
@@ -31,6 +31,9 @@ public class TmdbAdapterMapper {
         serie.setTmdbId(response.id());
         serie.setTitulo(response.name() != null ? response.name() : response.title());
         serie.setDescricao(response.overview());
+
+        serie.setNota(response.voteAverage());
+        serie.setPosterPath(response.posterPath());
 
         if (response.firstAirDate() != null && response.firstAirDate().length() >= 4) {
             serie.setAnoDeLancamento(Integer.parseInt(response.firstAirDate().substring(0, 4)));

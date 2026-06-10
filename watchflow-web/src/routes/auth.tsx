@@ -23,7 +23,9 @@ function AuthPage() {
       store.login(form.email, form.senha);
       navigate({ to: "/perfil" });
     } catch (err: any) {
-      setError(err.message);
+      console.error(err);
+      setError(err?.message ?? String(err));
+      if (mode === "register") setMode("register");
     }
   };
 
@@ -46,7 +48,11 @@ function AuthPage() {
             <Input label="Estado" value={form.estado} onChange={(v) => setForm({ ...form, estado: v })} />
           </div>
         )}
-        {error && <p className="text-sm text-destructive">{error}</p>}
+        {error && (
+          <p role="alert" aria-live="assertive" className="text-sm text-destructive">
+            {error}
+          </p>
+        )}
         <button className="w-full rounded-full bg-primary py-2.5 text-sm font-semibold text-primary-foreground">
           {mode === "login" ? "Entrar" : "Cadastrar"}
         </button>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { store, type User } from "@/lib/store";
 
 export function useSession() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null | undefined>(undefined);
   useEffect(() => {
     const sync = () => setUser(store.current());
     sync();

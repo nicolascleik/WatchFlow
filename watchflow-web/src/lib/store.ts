@@ -26,7 +26,12 @@ const read = <T,>(k: string, def: T): T => {
   try { return JSON.parse(localStorage.getItem(k) ?? "") as T; } catch { return def; }
 };
 const write = (k: string, v: unknown) => { if (typeof window !== "undefined") localStorage.setItem(k, JSON.stringify(v)); };
-const uid = () => crypto.randomUUID();
+const uid = () => {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return `wf-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+};
 
 export const store = {
   // ----- usuario -----
@@ -49,7 +54,7 @@ export const store = {
   },
   logout() { if (typeof window !== "undefined") { localStorage.removeItem(K.session); window.dispatchEvent(new Event("wf:session")); } },
   current(): User | null {
-    const id = typeof window !== "undefined" ? localStorage.getItem(K.session) : null;
+    const id = typeof window !== "undefined" ? read<string | null>(K.session, null) : null;
     if (!id) return null;
     return store.listUsers().find(u => u.id === id) ?? null;
   },

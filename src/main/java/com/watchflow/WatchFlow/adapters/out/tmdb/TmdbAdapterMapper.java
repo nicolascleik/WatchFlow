@@ -1,44 +1,57 @@
 package com.watchflow.WatchFlow.adapters.out.tmdb;
 
-import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbMidiaResponse;
+import com.watchflow.WatchFlow.adapters.out.tmdb.response.TmdbFilmeResponse;
 import com.watchflow.WatchFlow.core.domain.midia.Filme;
+import com.watchflow.WatchFlow.core.domain.midia.MidiaBase;
 import com.watchflow.WatchFlow.core.domain.midia.Serie;
+
+import java.util.Collections;
 
 public class TmdbAdapterMapper {
 
-    public static Filme toFilme(TmdbMidiaResponse response) {
+    public static MidiaBase toDomain(TmdbFilmeResponse response) {
         if (response == null) return null;
 
-        Filme filme = new Filme();
-        filme.setTmdbId(response.id());
-        filme.setTitulo(response.title() != null ? response.title() : response.name());
-        filme.setDescricao(response.overview());
+        // Regra de dedução: TMDB usa 'name' e 'firstAirDate' para Séries.
+        boolean isSerie = response.name() != null && !response.name().isEmpty();
 
-        filme.setNota(response.voteAverage());
-        filme.setPosterPath(response.posterPath());
+        String tituloFinal = isSerie ? response.name() : response.title();
+        String dataLancamentoRaw = isSerie ? response.firstAirDate() : response.releaseDate();
+        
+        Integer anoLancamento = extrairAno(dataLancamentoRaw);
 
-        if (response.releaseDate() != null && response.releaseDate().length() >= 4) {
-            filme.setAnoDeLancamento(Integer.parseInt(response.releaseDate().substring(0, 4)));
+        if (isSerie) {
+            return Serie.criar(
+                    response.id(),
+                    tituloFinal,
+                    response.overview(),
+                    anoLancamento,
+                    response.voteAverage(),
+                    Collections.emptyList(), // Plataformas vêm de outro endpoint do TMDB (provedores)
+                    response.numberOfSeasons() != null ? response.numberOfSeasons() : 1
+            );
+        } else {
+            return Filme.criar(
+                    response.id(),
+                    tituloFinal,
+                    response.overview(),
+                    anoLancamento,
+                    response.voteAverage(),
+                    Collections.emptyList(),
+                    response.runtime() != null ? response.runtime() : 0
+            );
         }
-
-        return filme;
     }
 
-    public static Serie toSerie(TmdbMidiaResponse response) {
-        if (response == null) return null;
-
-        Serie serie = new Serie();
-        serie.setTmdbId(response.id());
-        serie.setTitulo(response.name() != null ? response.name() : response.title());
-        serie.setDescricao(response.overview());
-
-        serie.setNota(response.voteAverage());
-        serie.setPosterPath(response.posterPath());
-
-        if (response.firstAirDate() != null && response.firstAirDate().length() >= 4) {
-            serie.setAnoDeLancamento(Integer.parseInt(response.firstAirDate().substring(0, 4)));
+    private static Integer extrairAno(String dataRaw) {
+        if (dataRaw == null || dataRaw.length() < 4) {
+            return null;
         }
-
-        return serie;
+        try {
+            // O TMDB sempre retorna no formato "YYYY-MM-DD"
+            return Integer.parseInt(dataRaw.substring(0, 4));
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }

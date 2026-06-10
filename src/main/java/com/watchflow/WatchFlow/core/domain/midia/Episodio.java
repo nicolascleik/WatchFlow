@@ -1,22 +1,34 @@
 package com.watchflow.WatchFlow.core.domain.midia;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.util.UUID;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Episodio {
-    private UUID id;
-    private Integer numeroDaTemporadaDoEpisodio;
-    private Integer numeroDoEpisodio; // refere ao numero do episodio atual, como 5
-    private String tituloDoEpisodio;
-    private Integer duracaoDoEpisodio;
-    private String sinopseDoEpisodio;
-    private Long episodioTMDBId;
+
+    private final UUID id;
+    private final UUID serieId;
+    private final Integer temporada;
+    private final Integer numero;
+    private final String titulo;
+
+    private Episodio(UUID id, UUID serieId, Integer temporada, Integer numero, String titulo) {
+        this.id = id;
+        this.serieId = serieId;
+        this.temporada = temporada;
+        this.numero = numero;
+        this.titulo = titulo;
+    }
+
+    public static Episodio criar(UUID serieId, Integer temporada, Integer numero, String titulo) {
+        return new Episodio(UUID.randomUUID(), serieId, temporada, numero, titulo);
+    }
+
+    public static Episodio reconstruir(UUID id, UUID serieId, Integer temporada, Integer numero, String titulo) {
+        return new Episodio(id, serieId, temporada, numero, titulo);
+    }
+
+    public UUID getId() { return id; }
+    public UUID getSerieId() { return serieId; }
+    public Integer getTemporada() { return temporada; }
+    public Integer getNumero() { return numero; }
+    public String getTitulo() { return titulo; }
 }

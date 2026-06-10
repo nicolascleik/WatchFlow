@@ -5,33 +5,30 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .cors(cors -> cors.configurationSource(request -> {
-                    CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("*"));
-                    configuration.setAllowedMethods(List.of("*"));
-                    configuration.setAllowedHeaders(List.of("*"));
-                    return configuration;
-                }))
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        // Liberando a criação de conta e os erros do Spring
-                        .requestMatchers(HttpMethod.POST, "/watchflow/usuarios").permitAll()
-                        .requestMatchers("/error").permitAll()
-                        .anyRequest().authenticated()
-                );
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(AbstractHttpConfigurer::disable) // Necessário para APIs REST (já que usaremos JWT depois)
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.POST, "/watchflow/auth/login").permitAll() // Libera criar conta
+                .requestMatchers("/auth/**").permitAll() // Libera rota de login futura
+                .anyRequest().permitAll() // TODO: Mudar para .authenticated() assim que criarmos o Filtro JWT
+            );
+        
         return http.build();
     }
 }

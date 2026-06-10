@@ -1,38 +1,39 @@
 package com.watchflow.WatchFlow.core.usecase.usuario.impl;
 
+import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
+import com.watchflow.WatchFlow.core.exceptions.RegraNegocioException;
 import com.watchflow.WatchFlow.core.gateway.CodificadorSenhaGateway;
 import com.watchflow.WatchFlow.core.gateway.UsuarioGateway;
-import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
 import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaCommand;
 import com.watchflow.WatchFlow.core.usecase.usuario.CriarContaUseCase;
-import lombok.RequiredArgsConstructor;
 
-import java.util.UUID;
-
-@RequiredArgsConstructor
 public class CriarContaUseCaseImpl implements CriarContaUseCase {
+
     private final UsuarioGateway usuarioGateway;
     private final CodificadorSenhaGateway codificadorSenhaGateway;
 
-    @Override
-    public void executar(CriarContaCommand comando) {
-        boolean emailExiste = usuarioGateway.existePorEmail(comando.getEmail());
+    // Sem anotações do Spring! A injeção será configurada manualmente na camada de Infra.
+    public CriarContaUseCaseImpl(UsuarioGateway usuarioGateway, CodificadorSenhaGateway codificadorSenhaGateway) {
+        this.usuarioGateway = usuarioGateway;
+        this.codificadorSenhaGateway = codificadorSenhaGateway;
+    }
 
-        if (emailExiste) {
-            throw new IllegalArgumentException("Email já cadastrado na plataforma.");
+    @Override
+    public void executar(CriarContaCommand command) {
+        if (usuarioGateway.existePorEmail(command.email())) {
+            throw new RegraNegocioException("Este e-mail já está em uso.");
         }
 
-        String senhaCodificada = codificadorSenhaGateway.codificar(comando.getSenha());
+        String senhaHasheada = codificadorSenhaGateway.codificar(command.senhaBruta());
 
-        Usuario usuario = Usuario.builder()
-                .id(UUID.randomUUID())
-                .nome(comando.getNome())
-                .email(comando.getEmail())
-                .senha(senhaCodificada)
-                .cidade(comando.getCidade())
-                .estado(comando.getEstado())
-                .build();
+        Usuario novoUsuario = Usuario.criar(
+                command.nome(),
+                command.email(),
+                senhaHasheada,
+                command.cidade(),
+                command.estado()
+        );
 
-        usuarioGateway.salvar(usuario);
+        usuarioGateway.salvar(novoUsuario);
     }
 }

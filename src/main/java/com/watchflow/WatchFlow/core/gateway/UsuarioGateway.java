@@ -3,13 +3,13 @@ package com.watchflow.WatchFlow.core.gateway;
 import com.watchflow.WatchFlow.core.domain.usuario.Usuario;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public interface UsuarioGateway {
     void salvar(Usuario usuario);
-    boolean existePorEmail(String email);
+    void salvarTodos(List<Usuario> usuarios);
     Usuario buscarPorId(UUID id);
-    List<Usuario> buscarTodos();
-    List<Usuario> buscarUsuariosPorIds(Set<UUID> amigosIds);
+    Usuario buscarPorEmail(String email);
+    boolean existePorEmail(String email);
+    List<Usuario> listarTodos();
 }

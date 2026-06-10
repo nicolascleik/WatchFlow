@@ -1,29 +1,41 @@
 package com.watchflow.WatchFlow.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "medias")
-public class MidiaEntity {
+@Table(name = "midias")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_midia", discriminatorType = DiscriminatorType.STRING)
+@Getter
+@Setter
+public abstract class MidiaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true)
+    @Column(name = "tmdb_id", unique = true, nullable = false)
     private Long tmdbId;
 
-    private String tipoMedia;
+    @Column(nullable = false)
+    private String titulo;
 
-    public MidiaEntity() {}
+    @Column(columnDefinition = "TEXT")
+    private String descricao;
 
-    public UUID getId() { return id; }
-    public void setId(UUID id) { this.id = id; }
+    @Column(name = "ano_lancamento")
+    private Integer anoLancamento;
 
-    public Long getTmdbId() { return tmdbId; }
-    public void setTmdbId(Long tmdbId) { this.tmdbId = tmdbId; }
+    @Column(name = "nota_tmdb")
+    private Double notaTmdb;
 
-    public String getTipoMedia() { return tipoMedia; }
-    public void setTipoMedia(String tipoMedia) { this.tipoMedia = tipoMedia; }
+    // Cria uma tabela auxiliar automática no banco apenas para listar os nomes dos streamings
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "midia_plataformas", joinColumns = @JoinColumn(name = "midia_id"))
+    @Column(name = "plataforma")
+    private List<String> plataformasDisponiveis;
 }

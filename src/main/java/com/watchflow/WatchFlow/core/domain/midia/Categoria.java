@@ -3,40 +3,26 @@ package com.watchflow.WatchFlow.core.domain.midia;
 import java.util.UUID;
 
 public class Categoria {
-    private UUID id;
-    private Integer tmdbGenreId;
-    private String nome;
+    
+    private final UUID id;
+    private final Integer tmdbGenreId;
+    private final String nome;
 
-    public Categoria() {
-    }
-
-    public Categoria(UUID id, Integer tmdbGenreId, String nome) {
+    private Categoria(UUID id, Integer tmdbGenreId, String nome) {
         this.id = id;
         this.tmdbGenreId = tmdbGenreId;
         this.nome = nome;
     }
 
-    public UUID getId() {
-        return id;
+    public static Categoria criar(Integer tmdbGenreId, String nome) {
+        return new Categoria(UUID.randomUUID(), tmdbGenreId, nome);
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public static Categoria reconstruir(UUID id, Integer tmdbGenreId, String nome) {
+        return new Categoria(id, tmdbGenreId, nome);
     }
 
-    public Integer getTmdbGenreId() {
-        return tmdbGenreId;
-    }
-
-    public void setTmdbGenreId(Integer tmdbGenreId) {
-        this.tmdbGenreId = tmdbGenreId;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public UUID getId() { return id; }
+    public Integer getTmdbGenreId() { return tmdbGenreId; }
+    public String getNome() { return nome; }
 }

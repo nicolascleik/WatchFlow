@@ -1,24 +1,26 @@
 package com.watchflow.WatchFlow.core.domain.midia;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import lombok.*;
-import lombok.experimental.SuperBuilder;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString(callSuper = true)
-@SuperBuilder
 public class Serie extends MidiaBase {
-    private Integer totalDeTemporada;
 
-    @Builder.Default
-    private List<Episodio> listaDeEpisodio = new ArrayList<>();
+    private final Integer totalTemporadas;
 
-    {
-        this.setTipo(TipoMidia.SERIE);
+    private Serie(UUID id, Long tmdbId, String titulo, String descricao, Integer anoLancamento, Double notaTmdb, List<String> plataformasDisponiveis, Integer totalTemporadas) {
+        super(id, tmdbId, titulo, descricao, anoLancamento, notaTmdb, plataformasDisponiveis, TipoMidia.SERIE);
+        this.totalTemporadas = totalTemporadas;
     }
+
+    // FÁBRICA: TMDB
+    public static Serie criar(Long tmdbId, String titulo, String descricao, Integer anoLancamento, Double notaTmdb, List<String> plataformas, Integer totalTemporadas) {
+        return new Serie(UUID.randomUUID(), tmdbId, titulo, descricao, anoLancamento, notaTmdb, plataformas, totalTemporadas);
+    }
+
+    // FÁBRICA: DB
+    public static Serie reconstruir(UUID id, Long tmdbId, String titulo, String descricao, Integer anoLancamento, Double notaTmdb, List<String> plataformas, Integer totalTemporadas) {
+        return new Serie(id, tmdbId, titulo, descricao, anoLancamento, notaTmdb, plataformas, totalTemporadas);
+    }
+
+    public Integer getTotalTemporadas() { return totalTemporadas; }
 }

@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: WatchFlow
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/watchflow
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+
+tmdb:
+  api:
+    url: https://api.themoviedb.org/3
+    token: ---

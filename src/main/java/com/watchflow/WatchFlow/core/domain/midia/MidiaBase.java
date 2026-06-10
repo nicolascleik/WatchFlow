@@ -21,6 +21,7 @@ public abstract class MidiaBase {
     private Integer anoDeLancamento;
     private String descricao;
     private double nota;
+    private String posterPath;
     private List<String> plataformasDisponiveis;
     private TipoMidia tipo;
 }

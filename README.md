@@ -19,6 +19,8 @@ A proposta do projeto vai além de um simples buscador de filmes. O sistema foi 
 * Registrar histórico de conteúdos assistidos
 * Criar uma experiência social baseada em entretenimento
 
+* DRIVE: https://drive.google.com/drive/folders/1VJ22aVWJBNkZlI-5B1otjQESZvHYCxWl
+
 ---
 
 # O Que o WatchFlow Faz
